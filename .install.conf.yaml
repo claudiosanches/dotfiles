@@ -1,0 +1,9 @@
+- clean: ['~']
+
+- link:
+  ~/.dotfiles: ''
+  ~/.gitconfig: git/gitconfig
+  ~/.gitignore_global: git/gitignore_global
+
+- shell:
+  - git update-submodules # after linking ~/.gitconfig
