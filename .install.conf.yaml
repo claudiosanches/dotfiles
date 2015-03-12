@@ -4,9 +4,11 @@
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore_global
     ~/.npmrc: npm/npmrc
-    ~/.vimrc: vim/vimrc
     ~/.vim: vim/vim
+    ~/.vimrc: vim/vimrc
+    ~/.zsh: zsh/zsh
+    ~/.zshrc: zsh/zshrc
+    ~/.wp: wp
 
 - shell:
-  - git submodule update --init --recursive
   - vim +PluginInstall +qall
