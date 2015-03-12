@@ -17,6 +17,6 @@ cd ~/.dotfiles
 
 ## License ##
 
-Copyright (c) 2015 Claudio Sanches.
-Licensed under the MIT license.
+Copyright (c) 2015 Claudio Sanches.  
+Licensed under the MIT license.  
 <http://claudiosmweb.mit-license.org/>
