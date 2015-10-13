@@ -11,7 +11,7 @@ CASE_SENSITIVE="true"
 ZSH_CUSTOM=$HOME/.zsh/custom/
 
 # Plugins
-plugins=(git gitignore cp command-not-found rsync)
+plugins=(git gitignore cp command-not-found rsync golang)
 
 # Initialize the oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -19,8 +19,12 @@ source $ZSH/oh-my-zsh.sh
 # Dotfiles PATH
 DOTFILES=$HOME/.dotfiles
 
+# Go
+GOPATH=$HOME/.go
+export GOPATH
+
 # User configuration
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$DOTFILES/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$DOTFILES/bin:$GOPATH/bin"
 
 # Editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
