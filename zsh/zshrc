@@ -24,7 +24,7 @@ GOPATH=$HOME/.go
 export GOPATH
 
 # User configuration
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$DOTFILES/bin:$GOPATH/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$DOTFILES/bin:/usr/local/go/bin:$GOPATH/bin"
 
 # Editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
