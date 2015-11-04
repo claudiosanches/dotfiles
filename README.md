@@ -12,6 +12,8 @@ Run this:
 ```bash
 git clone git@github.com:claudiosmweb/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
+git submodule init
+git submodule update
 ./install
 ```
 
