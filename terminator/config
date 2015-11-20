@@ -1,0 +1,24 @@
+[global_config]
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  title_transmit_bg_color = "#464646"
+  handle_size = 1
+  inactive_color_offset = 0.87
+[keybindings]
+[profiles]
+  [[default]]
+    use_system_font = False
+    background_darkness = 0.94
+    background_type = transparent
+    background_image = None
+    split_to_group = True
+    font = Ubuntu Mono 13
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
