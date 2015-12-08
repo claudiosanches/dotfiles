@@ -10,4 +10,5 @@ alias pypiu='python setup.py sdist upload -r pypi'
 alias pypiu='python setup.py sdist upload -r pypi'
 alias pipit='pip install -i https://testpypi.python.org/pypi'
 alias wpdebug='tail -n0 -f debug.log | while read line; do notify-send "WordPress Debug" "$line"; done'
-
+alias h='cd ~/'
+alias c='clear'
