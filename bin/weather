@@ -1,18 +1,9 @@
 #!/usr/bin/env bash
-# Weather
+# Weather by http://wttr.in/
 #
 
-if [[ "$1" == "-h" || "$1" == "--help" ]] ; then cat <<HELP
-Weather.
-
-Check weather using http://wttr.in/
-
-Usage:
-weather <[city]>
-
-Example:
-weather Sao_Paulo
-HELP
-exit; else
-  curl -4 http://wttr.in/$1
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  curl http://wttr.in/:help
+else
+  curl http://wttr.in/$1
 fi
