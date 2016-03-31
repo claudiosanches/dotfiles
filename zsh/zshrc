@@ -45,5 +45,5 @@ bashcompinit
 # WP-CLI completation
 source $HOME/.zsh/completion/wp-completion.bash
 
-### Added by the Heroku Toolbelt
+# Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
