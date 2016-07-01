@@ -42,7 +42,7 @@ echo " -> Installing WordPress..."
 mkdir -p /var/www/$name
 cd /var/www/$name
 wp core download
-wp core config --dbname="$name" --dbuser="root" --extra-php <<PHP
+wp core config --dbname="$name" --dbuser="root" --dbpass="root" --extra-php <<PHP
 // File System Method
 define( 'FS_METHOD', 'direct' );
 
