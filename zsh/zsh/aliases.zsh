@@ -13,3 +13,7 @@ alias sublime='sublime_text'
 alias svnpng='svn propset svn:mime-type image/png *'
 alias svnrm="svn st | grep '^!' | awk '{print $2}' | xargs svn --force delete"
 alias wpdebug='tail -n0 -f debug.log | while read line; do notify-send "WordPress Debug" "$line"; done'
+alias phpcs='~/.dotfiles/php/phpcs/scripts/phpcs'
+alias phpcbf='~/.dotfiles/php/phpcs/scripts/phpcbf'
+alias wpcs='phpcs --standard=WordPress'
+alias wpcbf='phpcbf --standard=WordPress'
