@@ -1,1 +1,1 @@
-tmp = ${HOME}/.tmp-npm
+tmp=/home/claudio/.tmp-npm
