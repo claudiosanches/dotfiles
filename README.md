@@ -17,6 +17,12 @@ git submodule update
 ./install
 ```
 
+## Update ##
+
+```bash
+git submodule update --remote
+```
+
 ## License ##
 
 Copyright (c) 2015 Claudio Sanches.  
