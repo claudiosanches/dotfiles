@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# WP Plugin Deploy
+#
+
+echo "-------------------------------------------"
+echo "         WORDPRESS PLUGIN RELEASER         "
+echo "-------------------------------------------"
+
+read -p "VERSION: " VERSION
+
+# Get the current plugin directory name.
+# This need to match with the plugin slug.
+PROJECT_NAME=${PWD##*/}
+
+# Save the current path.
+GIT_PATH=$PWD
+
+# SVN repos.
+SVN_REPOSITORIES_PATH=~/Projects/wordpress-plugins-svn
+
+# Project SVN path.
+SVN_PATH=$SVN_REPOSITORIES_PATH/$PROJECT_NAME
+
+echo "Creating tag on Git"
+
+git tag $VERSION
+git push origin master --tags
+
+# Update SVN.
+cd $SVN_PATH
+echo "Updating SVN"
+svn update
+
+# Send all files to SVN trunk excluding some dev files.
+cd $GIT_PATH
+rsync ./ $SVN_PATH/trunk/ --recursive --verbose --delete --delete-excluded \
+	--exclude=.codeclimate.yml \
+	--exclude=.coveralls.yml \
+	--exclude=.editorconfig \
+	--exclude=.git/ \
+	--exclude=.gitattributes \
+	--exclude=.github \
+	--exclude=.gitignore \
+	--exclude=.gitmodules \
+	--exclude=.jscrsrc \
+	--exclude=.jshintrc \
+	--exclude=.sass-cache \
+	--exclude=.scrutinizer.yml \
+	--exclude=.travis.yml \
+	--exclude=apigen.neon \
+	--exclude=apigen/ \
+	--exclude=CHANGELOG.txt \
+	--exclude=composer.json \
+	--exclude=CONTRIBUTING.md \
+	--exclude=Gruntfile.js \
+	--exclude=node_modules \
+	--exclude=package.json \
+	--exclude=phpunit.xml \
+	--exclude=phpunit.xml.dist \
+	--exclude=README.md \
+	--exclude=tests/
+
+# Remove old files and add new files.
+cd $SVN_PATH
+svn rm $( svn status | sed -e '/^!/!d' -e 's/^!//' ) --force delete
+svn add --force * --auto-props --parents --depth infinity -q
+
+# Create tag in SVN.
+svn copy trunk tags/${VERSION}
+
+echo "Commiting to wp.org SVN repository"
+
+# Commit it to wp.org.
+svn commit -m "Release "${VERSION}", see readme.txt for changelog."
+
+echo "WORDPRESS PLUGIN RELEASER DONE"
