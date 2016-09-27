@@ -51,14 +51,17 @@ rsync ./ $SVN_PATH/trunk/ --recursive --verbose --delete --delete-excluded \
 	--exclude=apigen/ \
 	--exclude=CHANGELOG.txt \
 	--exclude=composer.json \
+	--exclude=composer.lock \
 	--exclude=CONTRIBUTING.md \
 	--exclude=Gruntfile.js \
 	--exclude=node_modules \
 	--exclude=package.json \
+	--exclude=phpcs.ruleset.xml \
 	--exclude=phpunit.xml \
 	--exclude=phpunit.xml.dist \
 	--exclude=README.md \
-	--exclude=tests/
+	--exclude=tests/ \
+	--exclude=vendor
 
 # Remove old files and add new files.
 cd $SVN_PATH
