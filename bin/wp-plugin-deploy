@@ -65,7 +65,7 @@ rsync ./ $SVN_PATH/trunk/ --recursive --verbose --delete --delete-excluded \
 
 # Remove old files and add new files.
 cd $SVN_PATH
-svn rm $( svn status | sed -e '/^!/!d' -e 's/^!//' ) --force delete
+svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm
 svn add --force * --auto-props --parents --depth infinity -q
 
 # Create tag in SVN.
