@@ -21,8 +21,9 @@ SVN_REPOSITORIES_PATH=~/Projects/wordpress-plugins-svn
 # Project SVN path.
 SVN_PATH=$SVN_REPOSITORIES_PATH/$PROJECT_NAME
 
-echo "Creating tag on Git"
+echo "Commiting and creating tag on Git"
 
+git commit -am "Release "${VERSION}", see readme.txt for changelog."
 git tag $VERSION
 git push origin master --tags
 
