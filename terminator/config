@@ -5,6 +5,13 @@
   suppress_multiple_term_dialog = True
   title_transmit_bg_color = "#464646"
 [keybindings]
+  close_term = <Primary><Shift>w
+  close_window = <Primary><Shift>q
+  copy = <Primary><Shift>c
+  go_next = <Primary><Shift>n
+  go_prev = <Primary><Shift>p
+  split_horiz = <Primary><Shift>o
+  split_vert = <Primary><Shift>e
 [layouts]
   [[default]]
     [[[child1]]]

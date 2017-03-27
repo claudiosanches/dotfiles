@@ -17,3 +17,4 @@ alias phpcs='~/.dotfiles/php/phpcs/scripts/phpcs'
 alias phpcbf='~/.dotfiles/php/phpcs/scripts/phpcbf'
 alias wpcs='phpcs --standard=WordPress'
 alias wpcbf='phpcbf --standard=WordPress'
+alias lso="stat -c '%A %a %G %U %n' *"

@@ -40,3 +40,8 @@ fi
 
 # Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+# Load VTE for Terminix
+if [[ $TERMINIX_ID ]]; then
+  source /etc/profile.d/vte.sh
+fi
