@@ -1,0 +1,68 @@
+#!/bin/bash
+# Proxy helper
+#
+
+# Check for user config file
+if [ -r $HOME/.proxxxy ]; then
+  . $HOME/.proxxxy
+else
+  echo "You need create a ~/.proxxxy file with your USERNAME and TUNNEL_NAME config."
+  exit
+fi
+
+if [ -z $USERNAME ]; then
+  echo "Missing USERNAME option in your ~/.proxxxy file."
+  exit
+fi
+
+if [ -z $TUNNEL_NAME ]; then
+  echo "Missing TUNNEL_NAME option in your ~/.proxxxy file."
+  exit
+fi
+
+TUNNEL_SSH="ssh -C -f -N -D 8080 $USERNAME@$TUNNEL_NAME"
+COMMAND=${1:-status}
+TUNNEL=$(ps xo pid,command | grep "$TUNNEL_SSH"$ | awk '{ print $1; }')
+
+case $COMMAND in
+  (start|on)
+  if [[ $TUNNEL == "" ]] ; then
+    echo "Starting tunnel"
+    $TUNNEL_SSH
+    else
+      echo "Tunnel already ACTIVE, PID=$TUNNEL"
+    fi
+  ;;
+  (stop|off)
+  if [[ $TUNNEL != "" ]] ; then
+    echo "Stopping tunnel"
+    kill -TERM "$TUNNEL"
+  else
+    echo "Tunnel already INACTIVE"
+  fi
+  ;;
+  (restart)
+  if [[ $TUNNEL != "" ]] ; then
+    echo "Stopping tunnel"
+    echo "$TUNNEL"
+    kill -TERM "$TUNNEL"
+    kill -TERM "$TUNNEL"
+    echo "Starting tunnel"
+    $TUNNEL_SSH
+  else
+    echo "Tunnel INACTIVE"
+    echo "Starting tunnel"
+    $TUNNEL_SSH
+  fi
+  ;;
+  (status)
+  if [[ $TUNNEL == "" ]] ; then
+    echo "Tunnel INACTIVE"
+    else
+    echo "Tunnel ACTIVE, PID=$TUNNEL"
+  fi
+  ;;
+  (*)
+    echo "Usage: proxxxy {start|stop|restart|status}"
+  ;;
+esac
