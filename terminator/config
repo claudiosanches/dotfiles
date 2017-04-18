@@ -25,7 +25,6 @@
 [profiles]
   [[default]]
     background_darkness = 0.88
-    background_image = None
     background_type = transparent
     cursor_color = "#ffffff"
     font = Ubuntu Mono 13
