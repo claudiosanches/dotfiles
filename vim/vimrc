@@ -48,6 +48,9 @@ let g:user_emmet_leader_key='<C-Z>'
 " Vundle plugins
 " --------------
 
+" Themes
+Plugin 'vim-airline/vim-airline-themes'
+
 " Vundle core
 Plugin 'gmarik/Vundle.vim'
 
