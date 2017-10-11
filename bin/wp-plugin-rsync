@@ -4,7 +4,7 @@
 
 if [[ "$1" != "" ]]; then
 	rsync ./ $1 --recursive --verbose --delete --delete-excluded \
-		--exclude ".*/" \
+		--exclude=".*/" \
 		--exclude="*.md" \
 		--exclude=".*" \
 		--exclude="composer.*" \
