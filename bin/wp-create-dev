@@ -11,14 +11,14 @@ Usage:
 wp-create-dev [domain]
 
 Example:
-wp-create-dev testing.dev
+wp-create-dev testing.local
 HELP
 exit;
 fi
 
 echo " -> Starting installation..."
 
-name=$(echo $1 | sed 's/.dev//g')
+name=$(echo $1 | sed 's/.local//g')
 
 conf="<VirtualHost *:80>\n\tServerAdmin webmaster@localhost\n\tServerName $1\n\tDocumentRoot /var/www/$name\n\n\t<Directory /var/www/$name/>\n\t\tOptions Indexes FollowSymLinks MultiViews\n\t\tAllowOverride All\n\t\tOrder allow,deny\n\t\tallow from all\n\t</Directory>\n\n\tErrorLog ${APACHE_LOG_DIR}/error.log\n\tCustomLog ${APACHE_LOG_DIR}/access.log combined\n</VirtualHost>\n\n# vim: syntax=apache ts=4 sw=4 sts=4 sr noet"
 
