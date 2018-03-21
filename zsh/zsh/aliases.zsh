@@ -3,8 +3,6 @@ alias c='clear'
 alias h='cd ~/'
 alias lso="stat -c '%A %a %G %U %n' *"
 alias makepot='php ~/.wp/dev/tools/i18n/makepot.php'
-alias phpcbf='~/.dotfiles/php/phpcs/bin/phpcbf'
-alias phpcs='~/.dotfiles/php/phpcs/bin/phpcs'
 alias pipit='pip install -i https://testpypi.python.org/pypi'
 alias pluginpot='makepot wp-plugin'
 alias pypir='python setup.py register -r pypi'
@@ -17,8 +15,6 @@ alias stt='subl .'
 alias sublime='subl'
 alias svnpng='svn propset svn:mime-type image/png *'
 alias svnrm="svn st | grep '^!' | awk '{print $2}' | xargs svn --force delete"
-alias wpcbf='phpcbf --standard=WordPress'
-alias wpcs='phpcs -p --extensions=php --standard=WordPress'
 alias wpdebug='tail -n0 -f debug.log | while read line; do notify-send "WordPress Debug" "$line"; done'
 alias bomclear="find . -type f -exec sed '1s/^\xEF\xBB\xBF//' -i {} \;"
 alias bomfind="grep -rl $'\xEF\xBB\xBF' ."
