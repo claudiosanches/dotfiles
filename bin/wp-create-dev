@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Currency converter
+# Create WordPress dev environment in Apache2
 #
 
 if [[ "$#" != 1 || "$1" == "-h" || "$1" == "--help" ]] ; then cat <<HELP
@@ -8,28 +8,29 @@ WordPress dev generator.
 Creates vhosts and install the WordPress.
 
 Usage:
-wp-create-dev [domain]
+wp-create-dev [site_name]
 
 Example:
-wp-create-dev testing.local
+wp-create-dev testing
 HELP
 exit;
 fi
 
 echo " -> Starting installation..."
 
-name=$(echo $1 | sed 's/.local//g')
+name=$1
+url=$name.local
 
-conf="<VirtualHost *:80>\n\tServerAdmin webmaster@localhost\n\tServerName $1\n\tDocumentRoot /var/www/$name\n\n\t<Directory /var/www/$name/>\n\t\tOptions Indexes FollowSymLinks MultiViews\n\t\tAllowOverride All\n\t\tOrder allow,deny\n\t\tallow from all\n\t</Directory>\n\n\tErrorLog ${APACHE_LOG_DIR}/error.log\n\tCustomLog ${APACHE_LOG_DIR}/access.log combined\n</VirtualHost>\n\n# vim: syntax=apache ts=4 sw=4 sts=4 sr noet"
+conf="<VirtualHost *:80>\n\tServerAdmin webmaster@localhost\n\tServerName $url\n\tDocumentRoot /var/www/$name\n\n\t<Directory /var/www/$name/>\n\t\tOptions Indexes FollowSymLinks MultiViews\n\t\tAllowOverride All\n\t\tOrder allow,deny\n\t\tallow from all\n\t</Directory>\n\n\tErrorLog ${APACHE_LOG_DIR}/error.log\n\tCustomLog ${APACHE_LOG_DIR}/access.log combined\n</VirtualHost>\n\n# vim: syntax=apache ts=4 sw=4 sts=4 sr noet"
 
-confname="$1.conf"
+confname="$url.conf"
 
 # Add domain to /etc/hosts
 echo " -> Adding domain to /etc/hosts..."
-sudo bash -c "echo '127.0.0.1 $1' >> /etc/hosts"
+sudo bash -c "echo '127.0.0.1 $url' >> /etc/hosts"
 
 # Create conf file
-echo " -> Creating vhosts for $1..."
+echo " -> Creating vhosts for $url..."
 sudo touch /etc/apache2/sites-available/$confname
 sudo bash -c "echo -e '$conf' > /etc/apache2/sites-available/$confname"
 
@@ -61,4 +62,4 @@ mkdir -p /var/www/$name/wp-content/upgrade
 mkdir -p /var/www/$name/wp-content/uploads
 sudo chown www-data.www-data /var/www/$name/.htaccess /var/www/$name/wp-content /var/www/$name/wp-content/uploads
 
-echo " -> WP installed successfully: http://$1"
+echo " -> WP installed successfully: http://$url"
