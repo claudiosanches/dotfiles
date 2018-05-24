@@ -12,6 +12,3 @@ cd "${BASEDIR}"
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
-
-# Setup PHP_CodeSniffer.
-./php/phpcs/bin/phpcs --config-set installed_paths $HOME/.dotfiles/wp/wpcs,$HOME/.dotfiles/php/code_sniffer_standards
