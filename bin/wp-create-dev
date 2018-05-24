@@ -39,6 +39,7 @@ sudo service apache2 reload
 
 # Install WP
 echo " -> Installing WordPress..."
+sudo chown $USER.$USER /var/www
 mkdir -p /var/www/$name
 cd /var/www/$name
 wp core download
@@ -55,6 +56,9 @@ wp db create
 
 # Set permissions
 touch /var/www/$name/.htaccess
-sudo chown www-data.www-data /var/www/$name/.htaccess /var/www/$name/wp-content
+mkdir -p /var/www/$name/wp-content/languages
+mkdir -p /var/www/$name/wp-content/upgrade
+mkdir -p /var/www/$name/wp-content/uploads
+sudo chown www-data.www-data /var/www/$name/.htaccess /var/www/$name/wp-content /var/www/$name/wp-content/uploads
 
 echo " -> WP installed successfully: http://$1"
