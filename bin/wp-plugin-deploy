@@ -6,11 +6,10 @@ echo "-------------------------------------------"
 echo "         WORDPRESS PLUGIN RELEASER         "
 echo "-------------------------------------------"
 
-read -p "VERSION: " VERSION
-
 # Get the current plugin directory name.
 # This need to match with the plugin slug.
 PROJECT_NAME=${PWD##*/}
+PLUGIN_MAIN_FILE="$PROJECT_NAME.php"
 
 # Save the current path.
 GIT_PATH=$PWD
@@ -20,12 +19,62 @@ SVN_REPOSITORIES_PATH=~/Projects/wordpress-plugins-svn
 
 # Project SVN path.
 SVN_PATH=$SVN_REPOSITORIES_PATH/$PROJECT_NAME
+SVN_REPO="https://plugins.svn.wordpress.org/$PROJECT_NAME"
 
-echo "Commiting and creating tag on Git"
+echo "Scanning plugin files..."
+echo
 
-git commit -am "Release "${VERSION}", see readme.txt for changelog." --no-verify
-git tag $VERSION
-git push origin master --tags
+# Check version in readme.txt is the same as plugin file.
+PLUGIN_VERSION=$(grep -i "Version:" $GIT_PATH/$PLUGIN_MAIN_FILE | awk -F' ' '{print $NF}' | tr -d '\r')
+README_VERSION=$(grep -i "Stable tag:" $GIT_PATH/readme.txt | awk -F' ' '{print $NF}' | tr -d '\r')
+
+if [ "$README_VERSION" = "trunk" ]; then
+  echo "Version in readme.txt and $PLUGIN_MAIN_FILE don't match, but Stable tag is trunk. Let's continue..."
+elif [ "$PLUGIN_VERSION" != "$README_VERSION" ]; then
+  echo "Version in readme.txt and $PLUGIN_MAIN_FILE don't match. Exiting...."
+  exit 1;
+fi
+
+echo "Review all collected data before proceed:"
+echo
+echo "Plugin slug: $PROJECT_NAME"
+echo "Version to release: $PLUGIN_VERSION"
+echo "Plugin directory: $GIT_PATH"
+echo "Main file: $PLUGIN_MAIN_FILE"
+echo "Local SVN repository: $SVN_PATH"
+echo "Remote SVN repository: $SVN_REPO"
+echo
+
+printf "OK to proceed (y|N)? "
+read -e input
+PROCEED="${input:-n}"
+echo
+
+# Allow user cancellation.
+if [ $(echo "$PROCEED" |tr [:upper:] [:lower:]) != "y" ]; then
+  echo "Aborting..."; exit 1;
+fi
+
+echo "Starting deploy..."
+echo
+
+# Check if GIT tag exists.
+if git show-ref --tags --quiet --verify -- "refs/tags/$PLUGIN_VERSION"
+  then
+    echo "Git tag $PLUGIN_VERSION does exist. Let's continue..."
+  else
+    echo "$PLUGIN_VERSION does not exist as a git tag. Commiting and creating tag on Git.";
+
+    git commit -am "Release "${PLUGIN_VERSION}", see readme.txt for changelog." --no-verify
+    git tag $PLUGIN_VERSION
+    git push origin master --tags
+fi
+
+# Check if local SVN repository exists.
+if [ ! -d "$SVN_PATH" ]; then
+  echo "Checking SVN repository"
+  svn checkout https://plugins.svn.wordpress.org/$PROJECT_NAME $SVN_PATH
+fi
 
 # Update SVN.
 cd $SVN_PATH
@@ -57,15 +106,19 @@ rsync ./ $SVN_PATH/trunk/ --recursive --verbose --delete --delete-excluded \
 
 # Remove old files and add new files.
 cd $SVN_PATH
-svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm
-svn add --force * --auto-props --parents --depth infinity -q
+svn status | grep -v "^.[ \t]*\..*" | grep "^\!" | awk '{print $2"@"}' | xargs svn del
+svn status | grep -v "^.[ \t]*\..*" | grep "^?" | awk '{print $2"@"}' | xargs svn add
 
 # Create tag in SVN.
-svn copy trunk tags/${VERSION}
+svn copy trunk tags/${PLUGIN_VERSION}
+
+# Make sure that does not include a copy of "trunk/" directory inside "tags/"
+svn delete --force --quiet $SVN_PATH/tags/$PLUGIN_VERSION/trunk
 
 echo "Commiting to wp.org SVN repository"
 
 # Commit it to wp.org.
-svn commit -m "Release "${VERSION}", see readme.txt for changelog."
+svn commit -m "Release "${PLUGIN_VERSION}", see readme.txt for changelog."
 
+echo
 echo "WORDPRESS PLUGIN RELEASER DONE"
