@@ -52,7 +52,8 @@ echo
 
 # Allow user cancellation.
 if [ $(echo "$PROCEED" |tr [:upper:] [:lower:]) != "y" ]; then
-  echo "Aborting..."; exit 1;
+  echo "Aborting...";
+  exit 1;
 fi
 
 echo "Starting deploy..."
