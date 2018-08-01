@@ -23,7 +23,7 @@ SVN_PATH=$SVN_REPOSITORIES_PATH/$PROJECT_NAME
 
 echo "Commiting and creating tag on Git"
 
-git commit -am "Release "${VERSION}", see readme.txt for changelog."
+git commit -am "Release "${VERSION}", see readme.txt for changelog." --no-verify
 git tag $VERSION
 git push origin master --tags
 
