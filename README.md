@@ -10,7 +10,7 @@
 Run this:
 
 ```bash
-git clone git@github.com:claudiosmweb/dotfiles.git ~/.dotfiles
+git clone git@github.com:claudiosanches/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 git submodule init
 git submodule update
@@ -25,6 +25,6 @@ git submodule update --remote
 
 ## License ##
 
-Copyright (c) 2015 Claudio Sanches.  
+Copyright (c) 2018 Claudio Sanches.  
 Licensed under the MIT license.  
 <http://claudiosmweb.mit-license.org/>
