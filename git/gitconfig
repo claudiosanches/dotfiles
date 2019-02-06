@@ -31,3 +31,13 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+
+[alias]
+    # Delete all local branches but master and the current one, only if they are fully merged with master.
+    delete-all-branches = "!f(){\
+        git branch | grep -v "master" | grep -v ^* | xargs git branch -d;\
+    }; f"
+    # Delete all local branches but master and the current one.
+    delete-all-branches-force = "!f(){\
+        git branch | grep -v "master" | grep -v ^* | xargs git branch -D;\
+    }; f"
