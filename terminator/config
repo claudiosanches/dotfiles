@@ -1,17 +1,27 @@
 [global_config]
-  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   handle_size = 1
-  inactive_color_offset = 0.87
-  suppress_multiple_term_dialog = True
   title_transmit_bg_color = "#464646"
+  inactive_color_offset = 0.87
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  suppress_multiple_term_dialog = True
 [keybindings]
-  close_term = <Primary><Shift>w
-  close_window = <Primary><Shift>q
-  copy = <Primary><Shift>c
   go_next = <Primary><Shift>n
   go_prev = <Primary><Shift>p
   split_horiz = <Primary><Shift>o
   split_vert = <Primary><Shift>e
+  close_term = <Primary><Shift>w
+  copy = <Primary><Shift>c
+  close_window = <Primary><Shift>q
+[profiles]
+  [[default]]
+    background_darkness = 0.88
+    background_type = transparent
+    cursor_color = "#ffffff"
+    font = Ubuntu Mono 13
+    use_system_font = False
+    split_to_group = True
+  [[New Profile]]
+    cursor_color = "#aaaaaa"
 [layouts]
   [[default]]
     [[[child1]]]
@@ -22,11 +32,3 @@
       parent = ""
       type = Window
 [plugins]
-[profiles]
-  [[default]]
-    background_darkness = 0.88
-    background_type = transparent
-    cursor_color = "#ffffff"
-    font = Ubuntu Mono 13
-    split_to_group = True
-    use_system_font = False
