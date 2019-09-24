@@ -90,6 +90,7 @@ rsync ./ $SVN_PATH/trunk/ --recursive --verbose --delete --delete-excluded \
   --exclude=".*" \
   --exclude="composer.*" \
   --exclude="*.lock" \
+  --exclude="*.ruleset.xml" \
   --exclude=/vendor/ \
   --exclude=none \
   --exclude=apigen.neon \
