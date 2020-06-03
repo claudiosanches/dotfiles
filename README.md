@@ -25,6 +25,5 @@ git submodule update --remote
 
 ## License ##
 
-Copyright (c) 2019 Claudio Sanches.  
 Licensed under the MIT license.  
 <http://claudiosanches.mit-license.org/>
