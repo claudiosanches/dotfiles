@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Install all my extensions on VS Code.
+#
+
+code --install-extension EditorConfig.EditorConfig
+code --install-extension ms-vscode.Theme-TomorrowKit
+code --install-extension wongjn.php-sniffer
