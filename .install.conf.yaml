@@ -7,7 +7,7 @@
     ~/.npmrc: npm/npmrc
     ~/.vim: vim/vim
     ~/.vimrc: vim/vimrc
-    ~/.wp: wp
+    ~/.dotfiles/zsh/zsh/custom/themes/spaceship.zsh-theme: zsh/zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme
     ~/.zsh: zsh/zsh
     ~/.zshrc: zsh/zshrc
 

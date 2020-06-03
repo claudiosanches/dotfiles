@@ -2,7 +2,8 @@
 export ZSH=$HOME/.oh-my-zsh
 
 # Theme
-ZSH_THEME="miloshadzic"
+#ZSH_THEME="miloshadzic"
+ZSH_THEME="spaceship"
 
 # Use case-sensitive completion
 CASE_SENSITIVE="true"
