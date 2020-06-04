@@ -1,7 +1,13 @@
+- defaults:
+    link:
+      relink: true
+
 - clean: ['~']
 
 - link:
-    ~/.config/terminator/config: terminator/config
+    ~/.config/terminator/config:
+      create: true
+      path: terminator/config
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore_global
     ~/.npmrc: npm/npmrc
@@ -12,4 +18,4 @@
     ~/.zshrc: zsh/zshrc
 
 - shell:
-  - vim +PluginInstall +qall
+  - [vim +PluginInstall +qall, Installing vim plugins...]
