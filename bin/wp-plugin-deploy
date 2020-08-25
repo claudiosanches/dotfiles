@@ -68,7 +68,7 @@ if git show-ref --tags --quiet --verify -- "refs/tags/$PLUGIN_VERSION"
 
     git commit -am "Release "${PLUGIN_VERSION}", see readme.txt for changelog." --no-verify
     git tag $PLUGIN_VERSION
-    git push origin master --tags
+    git push origin trunk --tags
 fi
 
 # Check if local SVN repository exists.
@@ -84,27 +84,7 @@ svn update
 
 # Send all files to SVN trunk excluding some dev files.
 cd $GIT_PATH
-rsync ./ $SVN_PATH/trunk/ --recursive --verbose --delete --delete-excluded \
-  --exclude=".*/" \
-  --exclude="*.md" \
-  --exclude=".*" \
-  --exclude="composer.*" \
-  --exclude="*.lock" \
-  --exclude="*.ruleset.xml" \
-  --exclude=/vendor/ \
-  --exclude=none \
-  --exclude=apigen.neon \
-  --exclude=apigen/ \
-  --exclude=CHANGELOG.txt \
-  --exclude=Gruntfile.js \
-  --exclude=node_modules/ \
-  --exclude=package.json \
-  --exclude=package-lock.json \
-  --exclude=phpcs.xml \
-  --exclude=phpunit.xml \
-  --exclude=phpunit.xml.dist \
-  --exclude=README.md \
-  --exclude=tests/
+rsync ./ $SVN_PATH/trunk/ --recursive --delete --delete-excluded --exclude-from=".distignore"
 
 # Remove old files and add new files.
 cd $SVN_PATH

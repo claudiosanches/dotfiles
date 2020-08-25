@@ -2,16 +2,18 @@
 # Create WordPress dev environment in Apache2
 #
 
+me=$(basename "$0")
+
 if [[ "$#" != 1 || "$1" == "-h" || "$1" == "--help" ]] ; then cat <<HELP
 WordPress dev generator.
 
 Creates vhosts and install the WordPress.
 
 Usage:
-wp-create-dev [site_name]
+${me} [site_name]
 
 Example:
-wp-create-dev testing
+${me} testing
 HELP
 exit;
 fi
@@ -21,7 +23,7 @@ echo " -> Starting installation..."
 name=$1
 url=$name.local
 
-conf="<VirtualHost *:80>\n\tServerAdmin webmaster@localhost\n\tServerName $url\n\tDocumentRoot /var/www/$name\n\n\t<Directory /var/www/$name/>\n\t\tOptions Indexes FollowSymLinks MultiViews\n\t\tAllowOverride All\n\t\tOrder allow,deny\n\t\tallow from all\n\t</Directory>\n\n\tErrorLog ${APACHE_LOG_DIR}/error.log\n\tCustomLog ${APACHE_LOG_DIR}/access.log combined\n</VirtualHost>\n\n# vim: syntax=apache ts=4 sw=4 sts=4 sr noet"
+conf="<VirtualHost *:80>\n\tServerAdmin admin@localhost\n\tServerName $url\n\tDocumentRoot /var/www/$name\n\n\t<Directory /var/www/$name/>\n\t\tOptions Indexes FollowSymLinks MultiViews\n\t\tAllowOverride All\n\t\tOrder allow,deny\n\t\tallow from all\n\t</Directory>\n\n\tErrorLog ${APACHE_LOG_DIR}/error.log\n\tCustomLog ${APACHE_LOG_DIR}/access.log combined\n</VirtualHost>\n\n# vim: syntax=apache ts=4 sw=4 sts=4 sr noet"
 
 confname="$url.conf"
 

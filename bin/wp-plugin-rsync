@@ -3,26 +3,7 @@
 #
 
 if [[ "$1" != "" ]]; then
-	rsync ./ $1 --recursive --verbose --delete --delete-excluded \
-		--exclude=".*/" \
-		--exclude="*.md" \
-		--exclude=".*" \
-		--exclude="composer.*" \
-		--exclude="*.lock" \
-		--exclude=/vendor/ \
-		--exclude=none \
-		--exclude=apigen.neon \
-		--exclude=apigen/ \
-		--exclude=CHANGELOG.txt \
-		--exclude=Gruntfile.js \
-		--exclude=node_modules/ \
-		--exclude=package.json \
-		--exclude=package-lock.json \
-		--exclude=phpcs.xml \
-		--exclude=phpunit.xml \
-		--exclude=phpunit.xml.dist \
-		--exclude=README.md \
-		--exclude=tests/
+	rsync ./ $1 --recursive --delete --delete-excluded --exclude-from=".distignore"
 else
 	echo "Missing SVN PATH parameter!"
 fi

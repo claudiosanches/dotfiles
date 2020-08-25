@@ -3,23 +3,24 @@
 #
 
 # Check for user config file
-if [ -r $HOME/.proxxxy ]; then
-  . $HOME/.proxxxy
+if [ -r $HOME/.proxyme ]; then
+  . $HOME/.proxyme
 else
-  echo "You need create a ~/.proxxxy file with your USERNAME and TUNNEL_NAME config."
+  echo "You need create a ~/.proxyme file with your USERNAME and TUNNEL_NAME config."
   exit
 fi
 
 if [ -z $USERNAME ]; then
-  echo "Missing USERNAME option in your ~/.proxxxy file."
+  echo "Missing USERNAME option in your ~/.proxyme file."
   exit
 fi
 
 if [ -z $TUNNEL_NAME ]; then
-  echo "Missing TUNNEL_NAME option in your ~/.proxxxy file."
+  echo "Missing TUNNEL_NAME option in your ~/.proxyme file."
   exit
 fi
 
+ME=$(basename "$0")
 TUNNEL_SSH="ssh -C -f -N -D 8080 $USERNAME@$TUNNEL_NAME"
 COMMAND=${1:-status}
 TUNNEL=$(ps xo pid,command | grep "$TUNNEL_SSH"$ | awk '{ print $1; }')
@@ -63,6 +64,6 @@ case $COMMAND in
   fi
   ;;
   (*)
-    echo "Usage: proxxxy {start|stop|restart|status}"
+    echo "Usage: ${ME} {start|stop|restart|status}"
   ;;
 esac
