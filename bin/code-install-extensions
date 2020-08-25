@@ -2,6 +2,10 @@
 # Install all my extensions on VS Code.
 #
 
+code --install-extension christopherstyles.html-entities
 code --install-extension EditorConfig.EditorConfig
-code --install-extension ms-vscode.Theme-TomorrowKit
+code --install-extension ms-vscode.theme-tomorrowkit
+code --install-extension pnp.polacode
+code --install-extension simonsiefke.prettier-vscode
+code --install-extension whatwedo.twig
 code --install-extension wongjn.php-sniffer
