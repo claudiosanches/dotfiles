@@ -32,14 +32,14 @@
 	changed = green
 	untracked = cyan
 [alias]
-    # Delete all local branches but the primary branch and the current one,
+	# Delete all local branches but the primary branch and the current one,
 	# only if they are fully merged with primary branch.
-    delete-all-branches = "!f(){\
+	delete-all-branches = "!f(){\
 		local BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@');\
-        git branch | grep -v "${BRANCH}" | grep -v ^* | xargs git branch -d;\
-    }; f"
-    # Delete all local branches but the primary branch and the current one.
-    delete-all-branches-force = "!f(){\
+		git branch | grep -v "${BRANCH}" | grep -v ^* | xargs git branch -d;\
+	}; f"
+	# Delete all local branches but the primary branch and the current one.
+	delete-all-branches-force = "!f(){\
 		local BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@');\
-        git branch | grep -v "${BRANCH}" | grep -v ^* | xargs git branch -D;\
-    }; f"
+		git branch | grep -v "${BRANCH}" | grep -v ^* | xargs git branch -D;\
+	}; f"
