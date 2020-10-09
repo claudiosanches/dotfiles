@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Install plugin for debugging
+#
+# I use it only in localhost
+
+wp plugin install --activate wp-mail-catcher
+wp plugin install --activate query-monitor
+wp plugin install --activate https://github.com/claudiosanches/empty-plugin/archive/primary.zip
+
