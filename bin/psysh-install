@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Install all my extensions on VS Code.
+#
+
+wget https://psysh.org/psysh
+sudo mv psysh /usr/local/bin/psysh
+sudo chmod +x /usr/local/bin/psysh
+wp package install git@github.com:schlessera/wp-cli-psysh.git
+wp package install https://github.com/claudiosanches/shell-command/archive/fix/psysh-init.zip
