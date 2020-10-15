@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install all my extensions on VS Code.
+# Install PsySH, and enable it on WP-CLI.
 #
 
 wget https://psysh.org/psysh
