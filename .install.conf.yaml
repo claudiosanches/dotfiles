@@ -19,3 +19,6 @@
 
 - shell:
   - [vim +PluginInstall +qall, Installing vim plugins...]
+  - [./bin/code-install-extensions, Installing VS Code extensions...]
+  - [./bin/wp-cli-install, Installing WP-CLI...]
+  - [./bin/psysh-install, Installing PsySH...]
