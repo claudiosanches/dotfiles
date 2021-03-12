@@ -1,0 +1,23 @@
+#!/bin/bash
+# Gnome GUI to set mouse wheel speed with imwheel
+# Inspired by http://www.nicknorton.net/mousewheel.sh
+
+if ! command -v imwheel &> /dev/null; then
+  echo "imwheel could not be found, installing..."
+  sudo apt install imwheel
+fi
+
+CURRENT_VALUE=$(awk -F 'Button4,' '{print $2}' ~/.imwheelrc)
+CURRENT_VALUE="${CURRENT_VALUE#"${CURRENT_VALUE%%[![:space:]]*}"}" # Remove whitespace characters
+
+NEW_VALUE=$(zenity --scale --window-icon=info --ok-label=Apply --title="Wheelies" --text "Mouse wheel speed:" --min-value=1 --max-value=100 --value="${CURRENT_VALUE}" --step 1)
+
+if [ "${NEW_VALUE}" == "" ]; then
+  exit 0
+fi
+
+sed -i "s/\(${TARGET_KEY} *Button4, *\).*/\1${NEW_VALUE}/" ~/.imwheelrc # Find the string Button4, and write new value.
+sed -i "s/\(${TARGET_KEY} *Button5, *\).*/\1${NEW_VALUE}/" ~/.imwheelrc # Find the string Button5, and write new value.
+
+echo "Mouse wheel speed updated from ${CURRENT_VALUE} to ${NEW_VALUE}."
+imwheel -kill
