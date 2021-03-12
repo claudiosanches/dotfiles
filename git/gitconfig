@@ -43,3 +43,5 @@
 		local BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@');\
 		git branch | grep -v "${BRANCH}" | grep -v ^* | xargs git branch -D;\
 	}; f"
+[init]
+	defaultBranch = primary
