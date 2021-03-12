@@ -8,6 +8,10 @@
     ~/.config/terminator/config:
       create: true
       path: terminator/config
+    ~/.config/autostart/imwheel.desktop:
+      create: true
+      force: true
+      path: imwheel/imwheel.desktop
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore_global
     ~/.imwheelrc: imwheel/imwheelrc
