@@ -7,3 +7,5 @@ alias svnrm="svn st | grep '^!' | awk '{print $2}' | xargs svn --force delete"
 alias wpdebug='tail -n0 -f debug.log | while read line; do notify-send "WordPress Debug" "$line"; done'
 alias bomclear="find . -type f -exec sed '1s/^\xEF\xBB\xBF//' -i {} \;"
 alias bomfinder="grep -rl $'\xEF\xBB\xBF' ."
+alias enableloopback="pacmd load-module module-loopback latency_msec=5"
+alias disableloopback="pacmd unload-module module-loopback"
