@@ -6,4 +6,4 @@
 	url = https://github.com/gmarik/Vundle.vim.git
 [submodule "zsh/zsh/custom/themes/spaceship-prompt"]
 	path = zsh/zsh/custom/themes/spaceship-prompt
-	url = https://github.com/denysdovhan/spaceship-prompt.git
+	url = https://github.com/spaceship-prompt/spaceship-prompt
