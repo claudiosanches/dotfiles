@@ -8,13 +8,8 @@
     ~/.config/terminator/config:
       create: true
       path: terminator/config
-    ~/.config/autostart/imwheel.desktop:
-      create: true
-      force: true
-      path: imwheel/imwheel.desktop
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore_global
-    ~/.imwheelrc: imwheel/imwheelrc
     ~/.npmrc: npm/npmrc
     ~/.vim: vim/vim
     ~/.vimrc: vim/vimrc
@@ -25,5 +20,3 @@
 - shell:
   - [vim +PluginInstall +qall, Installing vim plugins...]
   - [./bin/code-install-extensions, Installing VS Code extensions...]
-  - [./bin/wp-cli-install, Installing WP-CLI...]
-  - [./bin/psysh-install, Installing PsySH...]
