@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Install VS Code user settings.
+#
+
+USER_SETTINGS_PATH=${HOME}/.config/Code/User
+rm -rf $USER_SETTINGS_PATH
+git clone git@github.com:claudiosanches/vscode-settings.git $USER_SETTINGS_PATH
