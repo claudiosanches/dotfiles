@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+docker run --rm --interactive --tty \
+  --name=php-linter \
+  --volume $(pwd):/app \
+  --workdir /app \
+  php:8.1-cli php $@
