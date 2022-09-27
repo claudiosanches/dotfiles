@@ -16,6 +16,7 @@
     ~/.dotfiles/zsh/zsh/custom/themes/spaceship.zsh-theme: zsh/zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme
     ~/.zsh: zsh/zsh
     ~/.zshrc: zsh/zshrc
+    ~/.spaceshiprc.zsh: zsh/spaceshiprc.zsh
 
 - shell:
   - [vim +PluginInstall +qall, Installing vim plugins...]

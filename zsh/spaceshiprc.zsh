@@ -1,0 +1,2 @@
+# Custom ASYNC Symbol
+SPACESHIP_ASYNC_SYMBOL=""
