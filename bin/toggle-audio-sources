@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Toggle audio sources
+#
+
+main () {
+	G560_OUTPUT="alsa_output.usb-Logitech_G560_Gaming_Speaker_00000000-00.iec958-stereo"
+	RAZER_OUTPUT="alsa_output.usb-Razer_Razer_BlackShark_V2_Pro-00.5.iec958-stereo"
+	CURRENT_OUTPUT=$(pactl get-default-sink)
+	ENABLE_LOOPBACK=${1:-false}
+
+	pactl unload-module module-loopback > /dev/null 2>&1
+
+	if [[ "$CURRENT_OUTPUT" == "$G560_OUTPUT" ]]; then
+		pactl set-default-sink "$RAZER_OUTPUT"
+	else
+		pactl set-default-sink "$G560_OUTPUT"
+	fi
+
+	if $ENABLE_LOOPBACK; then
+		pactl load-module module-loopback latency_msec=5
+	fi
+}
+
+main $1
