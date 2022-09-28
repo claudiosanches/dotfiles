@@ -13,16 +13,10 @@ main () {
 
 	# Fill variables to make sure IDs are correct
 	for line in $SINKS_LIST; do
-		echo $line
 		if [[ $line == *"Logitech_G560_Gaming_Speaker"* ]]; then
 			G560_OUTPUT=${line:1:-1}
 		elif [[ $line == *"Razer_BlackShark_V2_Pro"* ]]; then
 			RAZER_OUTPUT=${line:1:-1}
-		fi
-	done
-	for line in $SOURCES_LIST; do
-		if [[ $line == *"ASUS_CU4K30_UVC_UHD_Video"* ]]; then
-			ASUS_INPUT=${line:1:-1}
 		fi
 	done
 
@@ -38,6 +32,13 @@ main () {
 
 	# Enable loopback
 	if $ENABLE_LOOPBACK; then
+		# Get correct input
+		for line in $SOURCES_LIST; do
+			if [[ $line == *"ASUS_CU4K30_UVC_UHD_Video"* ]]; then
+				ASUS_INPUT=${line:1:-1}
+			fi
+		done
+
 		pactl set-default-source "$ASUS_INPUT"
 		pactl load-module module-loopback latency_msec=5
 	fi
