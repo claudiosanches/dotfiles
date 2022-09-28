@@ -3,20 +3,42 @@
 #
 
 main () {
-	G560_OUTPUT="alsa_output.usb-Logitech_G560_Gaming_Speaker_00000000-00.iec958-stereo"
-	RAZER_OUTPUT="alsa_output.usb-Razer_Razer_BlackShark_V2_Pro-00.5.iec958-stereo"
-	CURRENT_OUTPUT=$(pactl get-default-sink)
 	ENABLE_LOOPBACK=${1:-false}
+	G560_OUTPUT="alsa_output.usb-Logitech_G560_Gaming_Speaker_00000000-00.iec958-stereo"
+	RAZER_OUTPUT="alsa_output.usb-Razer_Razer_BlackShark_V2_Pro-00.iec958-stereo"
+	ASUS_INPUT="alsa_input.usb-ASUS_CU4K30_UVC_UHD_Video_392101600550-00.iec958-stereo"
+	SINKS_LIST=$(pactl list sinks | grep -s node.name | sed -e 's/^[[:space:]]*//')
+	SOURCES_LIST=$(pactl list sources | grep -s node.name | sed -e 's/^[[:space:]]*//')
+	CURRENT_OUTPUT=$(pactl get-default-sink)
 
+	# Fill variables to make sure IDs are correct
+	for line in $SINKS_LIST; do
+		echo $line
+		if [[ $line == *"Logitech_G560_Gaming_Speaker"* ]]; then
+			G560_OUTPUT=${line:1:-1}
+		elif [[ $line == *"Razer_BlackShark_V2_Pro"* ]]; then
+			RAZER_OUTPUT=${line:1:-1}
+		fi
+	done
+	for line in $SOURCES_LIST; do
+		if [[ $line == *"ASUS_CU4K30_UVC_UHD_Video"* ]]; then
+			ASUS_INPUT=${line:1:-1}
+		fi
+	done
+
+	# Disable loopback
 	pactl unload-module module-loopback > /dev/null 2>&1
 
+	# Toggle sink device
 	if [[ "$CURRENT_OUTPUT" == "$G560_OUTPUT" ]]; then
 		pactl set-default-sink "$RAZER_OUTPUT"
 	else
 		pactl set-default-sink "$G560_OUTPUT"
 	fi
 
+	# Enable loopback
 	if $ENABLE_LOOPBACK; then
+		pactl set-default-source "$ASUS_INPUT"
 		pactl load-module module-loopback latency_msec=5
 	fi
 }
