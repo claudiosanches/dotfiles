@@ -8,15 +8,15 @@
     ~/.config/terminator/config:
       create: true
       path: terminator/config
+    ~/.dotfiles/zsh/zsh/custom/themes/spaceship.zsh-theme: zsh/zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore_global
     ~/.npmrc: npm/npmrc
+    ~/.spaceshiprc.zsh: zsh/spaceshiprc.zsh
     ~/.vim: vim/vim
     ~/.vimrc: vim/vimrc
-    ~/.dotfiles/zsh/zsh/custom/themes/spaceship.zsh-theme: zsh/zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme
     ~/.zsh: zsh/zsh
     ~/.zshrc: zsh/zshrc
-    ~/.spaceshiprc.zsh: zsh/spaceshiprc.zsh
 
 - shell:
   - [vim +PluginInstall +qall, Installing vim plugins...]
