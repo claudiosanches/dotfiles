@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-docker run --rm --interactive --tty \
-  --volume $(pwd):/app \
-  --volume ${COMPOSER_HOME:-$HOME/.composer}:/tmp \
-  composer $@
