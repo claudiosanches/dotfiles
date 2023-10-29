@@ -21,7 +21,7 @@ source $ZSH/oh-my-zsh.sh
 DOTFILES=$HOME/.dotfiles
 
 # User configuration
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$DOTFILES/bin:/snap/bin:$HOME/.local/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$DOTFILES/bin:/snap/bin:$HOME/.local/bin:$HOME/Projects/slic"
 
 # Editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
