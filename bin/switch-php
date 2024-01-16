@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Switch Apache2 PHP version
+#
+
+me=$(basename "$0")
+
+if [[ "$#" != 1 || "$1" == "-h" || "$1" == "--help" ]] ; then cat <<HELP
+Switch Apache2 PHP version
+
+Usage:
+${me} [php_version]
+
+Example:
+${me} 8.3
+HELP
+exit;
+fi
+
+echo " -> Switching PHP version..."
+
+php_version=$1
+
+echo " -> Disabling current PHP version..."
+sudo a2dismod php*
+
+echo " -> Enabling PHP ${php_version}..."
+sudo a2enmod php${php_version}
+
+echo " -> Restaring Apache2..."
+sudo service apache2 restart
+
+echo " -> Apache2's current PHP version is now: ${php_version}"
